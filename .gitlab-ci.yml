@@ -1,0 +1,10 @@
+build_image:
+  image: docker:git
+  services:
+  - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.seidemann-web.com
+    - docker build -t registry.seidemann-web.com/creative-inneinrichter/node .
+    - docker push registry.seidemann-web.com/creative-inneinrichter/node:latest
+  only:
+    - master
