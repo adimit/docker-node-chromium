@@ -2,9 +2,11 @@ variables:
   GIT_STRATEGY: "clone"
 
 build_image:
+  variables:
+    IMAGE: "registry.seidemann-web.com/creative-inneinrichter/node:${CI_COMMIT_REF_NAME}"
   script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.seidemann-web.com
-    - docker build -t registry.seidemann-web.com/creative-inneinrichter/node .
-    - docker push registry.seidemann-web.com/creative-inneinrichter/node:latest
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} registry.seidemann-web.com
+    - docker build -t ${IMAGE} .
+    - docker push ${IMAGE}
   only:
     - master
