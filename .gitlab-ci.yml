@@ -10,3 +10,6 @@ build_image:
     - docker push ${IMAGE}
   only:
     - master
+  tags:
+    - dind
+    - overlay
