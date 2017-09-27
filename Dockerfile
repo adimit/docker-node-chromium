@@ -1,8 +1,10 @@
-FROM node:8-alpine
+FROM node:8
 MAINTAINER Aleksandar Dimitrov <aleks.dimitrov@gmail.com>
 
-RUN apk add --update chromium udev ttf-freefont
+RUN apt-get update \
+ && apt-get install -y chromium ttf-freefont \
+ && rm -rf /var/lib/apt/lists/*
 
 USER node
 
-#ENTRYPOINT ["chromium-browser", "--headless", "--disable-gpu"]
+CMD ["node"]
